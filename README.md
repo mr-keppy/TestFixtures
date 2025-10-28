@@ -25,29 +25,29 @@ All fixtures are implemented as **xUnit [Collection Fixtures](https://xunit.net/
 
 ```csharp
 [Collection("Database collection")]
-public class PolicyRepositoryTests
+public class SampleRepositoryTests
 {
     private readonly MsSqlDatabaseFixture _db;
 
-    public PolicyRepositoryTests(MsSqlDatabaseFixture db)
+    public SampleRepositoryTests(MsSqlDatabaseFixture db)
     {
         _db = db;
     }
 
     [Fact]
-    public async Task Should_Insert_And_Retrieve_Policy()
+    public async Task Should_Insert_And_Retrieve_Sample()
     {
         var context = _db.CreateDbContext();
         // Arrange
-        var policy = new Policy { Name = "Test Policy" };
-        context.Policies.Add(policy);
+        var sample = new Sample { Name = "Test Policy" };
+        context.Samples.Add(policy);
         await context.SaveChangesAsync();
 
         // Act
-        var retrieved = await context.Policies.FindAsync(policy.Id);
+        var retrieved = await context.Samples.FindAsync(sample.Id);
 
         // Assert
-        Assert.Equal("Test Policy", retrieved.Name);
+        Assert.Equal("Test Sample", retrieved.Name);
     }
 }
 ```
